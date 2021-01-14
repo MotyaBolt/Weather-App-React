@@ -8,7 +8,7 @@ class Display extends React.Component {
         return (
             <div className='display'>
                 <div className={this.props.loaded === true ? 'display-before' : 'display-after'}>
-                    <p className='starting-message'>{this.props.error ? 'Please enter correct sity name' : 'Please enter your sity name'}</p>
+                    <p className='starting-message'>{this.props.error ? 'Please enter correct city name' : 'Please enter your city name'}</p>
                 </div>
                 <div className='display-main'>
                     <div className='main'>
