@@ -12,7 +12,7 @@ class Display extends React.Component {
                 </div>
                 <div className='display-main'>
                     <div className='main'>
-                        <p className='sity-name'>{this.props.sityName}</p>
+                        <p className='city-name'>{this.props.cityName}</p>
                         <p className='current-date'>{this.props.currentDate}</p>
                         <p className='current-time'>{this.props.currentTime}</p>
                         <p className='weather-desc'>{this.props.weatherDesc}</p>
