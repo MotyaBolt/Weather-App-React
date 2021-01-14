@@ -43,8 +43,8 @@ class App extends React.Component {
             let localTime = date.getTime();
             let localOffset = date.getTimezoneOffset() * 60000;
             let utc = localTime + localOffset;
-            let sityTime = utc + (1000 * data.timezone);
-            let newDate = new Date(sityTime);
+            let сityTime = utc + (1000 * data.timezone);
+            let newDate = new Date(сityTime);
             let currentTime = 0;
             newDate.getHours() < 10 ? currentTime = '0' + newDate.getHours() + ':' + newDate.getMinutes()
             : currentTime = newDate.getHours() + ':' + newDate.getMinutes();
