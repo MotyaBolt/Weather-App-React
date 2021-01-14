@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       inputValue: '',
-      sity: '',
+      city: '',
       date: '',
       time: '',
       icon: '',
@@ -54,7 +54,7 @@ class App extends React.Component {
             let currentDate = new Intl.DateTimeFormat('en-US', options).format(newDate);
             this.setState({
               isLoaded: true,
-              sity: data.name,
+              city: data.name,
               date: currentDate,
               time: currentTime,
               temperature: Math.round(data.main.temp - 273.15),
@@ -107,7 +107,7 @@ class App extends React.Component {
             let currentDate = new Intl.DateTimeFormat('en-US', options).format(newDate);
             this.setState({
               isLoaded: true,
-              sity: data.name,
+              city: data.name,
               date: currentDate,
               time: currentTime,
               temperature: Math.round(data.main.temp - 273.15),
@@ -142,7 +142,7 @@ class App extends React.Component {
       <div className='app'>
           <Header enterClick={this.fetchDataEnter} getInputValue={this.getSityName} value={this.state.inputValue} 
           showWeather={this.fetchData}/>
-          <Display loaded={this.state.isLoaded} error={this.state.error} sityName={this.state.sity} currentTime={this.state.time} currentDate={this.state.date} 
+          <Display loaded={this.state.isLoaded} error={this.state.error} cityName={this.state.city} currentTime={this.state.time} currentDate={this.state.date} 
            weatherDesc={this.state.description} 
           iconLink={this.state.icon} temperature={this.state.temperature} 
           feelsLikeTemp={this.state.feelsLikeTemp} humidity={this.state.humidity} 
