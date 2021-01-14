@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.header {
+    background-color: white;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 4px 5px 0 rgb(223, 222, 222);
+}
+
+.header-main {
+    display: flex;
+    align-items: center;
+}
+
+.page-name {
+    margin: 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    color: rgb(120, 120, 195);
+}
+
+.search-input {
+    height: 35px;
+    font-size: 19px;
+    outline: none;
+    width: 250px;
+    padding-left: 7px;
+    margin-right: 20px;
+    border: 2px solid rgb(189, 189, 226);
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border: 2px solid rgb(120, 120, 195);
+}
+
+.search-btn {
+    height: 40px;
+    width: 120px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid rgb(94, 129, 94);
+    outline: none;
+    color: rgb(94, 129, 94);
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    color: white;
+    background-color: rgb(94, 129, 94);
+}
+
+@media screen and (max-width: 600px) { 
+    .page-name {
+       display: none;
+    }
+
+    .header {
+        background-color: white;
+        height: 150px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: 0 4px 5px 0 rgb(223, 222, 222);
+    }
+
+    .header-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-input {
+        margin-right: 0px;
+        height: 35px;
+        font-size: 19px;
+        outline: none;
+        width: 250px;
+        padding-left: 7px;
+        border: 2px solid rgb(189, 189, 226);
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+    }
+}
