@@ -18,7 +18,8 @@ class App extends React.Component {
       humidity: '',
       wind: '',
       isLoaded: false,
-      error: null
+      error: null,
+      weatherCards: []
     }
     this.fetchData = this.fetchData.bind(this);
     this.getSityName = this.getSityName.bind(this);
@@ -38,7 +39,7 @@ class App extends React.Component {
         (data) => {
           if(this.state.inputValue !== '') {
             let iconId = data.weather[0].icon;
-            let currentIcon = `http://openweathermap.org/img/wn/${iconId}.png`
+            let currentIcon = `http://openweathermap.org/img/wn/${iconId}@4px5.png`
             let date = new Date();
             let localTime = date.getTime();
             let localOffset = date.getTimezoneOffset() * 60000;
@@ -53,6 +54,7 @@ class App extends React.Component {
             let options = { month: 'long', day: 'numeric'};
             let currentDate = new Intl.DateTimeFormat('en-US', options).format(newDate);
             this.setState({
+              weatherCards: [...weatherCards, data]
               isLoaded: true,
               city: data.name,
               date: currentDate,
@@ -65,7 +67,7 @@ class App extends React.Component {
               icon: currentIcon,
               inputValue: ''
             });
-            console.log(data);
+            console.log(this.state.weatherCards);
           }
         },
       )
@@ -140,13 +142,25 @@ class App extends React.Component {
   render () {
     return (
       <div className='app'>
-          <Header enterClick={this.fetchDataEnter} getInputValue={this.getSityName} value={this.state.inputValue} 
-          showWeather={this.fetchData}/>
-          <Display loaded={this.state.isLoaded} error={this.state.error} cityName={this.state.city} currentTime={this.state.time} currentDate={this.state.date} 
-           weatherDesc={this.state.description} 
-          iconLink={this.state.icon} temperature={this.state.temperature} 
-          feelsLikeTemp={this.state.feelsLikeTemp} humidity={this.state.humidity} 
-          windSpeed={this.state.wind}/>
+          <Header 
+            enterClick={this.fetchDataEnter} 
+            getInputValue={this.getSityName} 
+            value={this.state.inputValue} 
+            showWeather={this.fetchData}
+          />
+          <Display 
+            loaded={this.state.isLoaded} 
+            error={this.state.error} 
+            cityName={this.state.city} 
+            currentTime={this.state.time} 
+            currentDate={this.state.date} 
+            weatherDesc={this.state.description} 
+            iconLink={this.state.icon} 
+            temperature={this.state.temperature} 
+            feelsLikeTemp={this.state.feelsLikeTemp} 
+            humidity={this.state.humidity} 
+            windSpeed={this.state.wind}
+          />
       </div>
     )
   }
