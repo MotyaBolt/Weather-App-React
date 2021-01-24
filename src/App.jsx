@@ -34,6 +34,7 @@ class App extends React.Component {
   };
 
   componentDidMount () {
+    if(localStorage.getItem('card') !== null) {
     let storage = JSON.parse(localStorage.getItem('card'));
     this.setState({
       isLoaded: storage.isLoaded,
@@ -49,6 +50,7 @@ class App extends React.Component {
       inputValue: storage.inputValue,
       weatherCards: storage.weatherCards
     });
+  }
     interval = setInterval(this.updateCard, intervalTime)
   }
 
