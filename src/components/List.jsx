@@ -19,8 +19,8 @@ class List extends React.Component {
                     <button onClick={this.showSettings} className="update-settigns">Settings</button>
                     <div className={this.state.settings === true ? "settings-block" : 'settings-block-none'}>
                     <h4>Automatic weather update every: </h4>
-                      <p><input onChange={this.props.getTimeUpdate} className='radio' type="radio" name='updtime' value='10' defaultChecked></input>10 minutes</p>
-                      <p><input onChange={this.props.getTimeUpdate} className='radio' type="radio" name='updtime' value='30'></input>30 minutes</p>
+                      <p><input onChange={this.props.getTimeUpdate} className='radio' type="radio" name='updtime' value='10' ></input>10 minutes</p>
+                      <p><input onChange={this.props.getTimeUpdate} className='radio' type="radio" name='updtime' value='30' ></input>30 minutes</p>
                       <p><input onChange={this.props.getTimeUpdate} className='radio' type="radio" name='updtime' value='60'></input>60 minutes</p>
                     </div>
                 </div>

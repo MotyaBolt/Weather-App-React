@@ -20,7 +20,8 @@ class App extends React.Component {
       wind: '',
       isLoaded: false,
       error: null,
-      weatherCards: []
+      weatherCards: [],
+      checkedBtnId: ''
     }
     this.fetchData = this.fetchData.bind(this);
     this.getSityName = this.getSityName.bind(this);
@@ -33,26 +34,47 @@ class App extends React.Component {
     this.updateDisplay = this.updateDisplay.bind(this);
   };
 
-  componentDidMount () {
+  componentDidMount () { 
     if(localStorage.getItem('card') !== null) {
     let storage = JSON.parse(localStorage.getItem('card'));
-    this.setState({
-      isLoaded: storage.isLoaded,
-      city: storage.city,
-      date: storage.date,
-      time: storage.time,
-      temperature: storage.temperature,
-      feelsLikeTemp: storage.feelsLikeTemp,
-      description: storage.description,
-      humidity: storage.humidity,
-      wind: storage.wind,
-      icon: storage.icon,
-      inputValue: storage.inputValue,
-      weatherCards: storage.weatherCards
-    });
-  }
+      this.setState({
+        isLoaded: storage.isLoaded,
+        city: storage.city,
+        date: storage.date,
+        time: storage.time,
+        temperature: storage.temperature,
+        feelsLikeTemp: storage.feelsLikeTemp,
+        description: storage.description,
+        humidity: storage.humidity,
+        wind: storage.wind,
+        icon: storage.icon,
+        inputValue: storage.inputValue,
+        weatherCards: storage.weatherCards
+      });
+    }
+    if(localStorage.getItem('updatetime') !== null) {
+      let storagetime = localStorage.getItem('updatetime');
+      let radioButtons = document.querySelectorAll('.radio');
+      radioButtons.forEach(item => {
+        item.defaultChecked = false
+        if(item.value === storagetime) {
+          item.defaultChecked = true
+        }
+      });
+      intervalTime = storagetime * 60000;
+    }
+    else  {
+      let radioButtons = document.querySelectorAll('.radio');
+      console.log(intervalTime)
+      radioButtons.forEach(item => {
+        if(item.value === '10') {
+          item.defaultChecked = true
+          intervalTime = item.value * 60000;
+        }
+      })
+    };
     interval = setInterval(this.updateCard, intervalTime)
-  }
+  };
 
   updateCard () {
     if(this.state.weatherCards.length > 0) {
@@ -79,8 +101,9 @@ class App extends React.Component {
           });
         });
         localStorage.setItem("card", JSON.stringify(this.state))
-        this.updateDisplay()
-    };
+        this.updateDisplay();
+        console.log('second')
+    }
   };
 
   getSityName (event) {
@@ -90,6 +113,7 @@ class App extends React.Component {
   };
 
   fetchData () {
+    if(this.state.inputValue !== '') {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.inputValue}&appid=${APIKEY}`)
       .then(response => {
         if (response.ok) {
@@ -155,6 +179,7 @@ class App extends React.Component {
           error
         });
       })
+    }
   };
 
   fetchDataEnter (e) {
@@ -235,6 +260,11 @@ class App extends React.Component {
   };
 
   getUpdateTime (e) {
+    console.log(e.target.value)
+    this.setState({
+      checkedBtnId: e.target.value}, 
+      () => {localStorage.setItem("updatetime", this.state.checkedBtnId)
+    });
     if(this.state.weatherCards.length > 0) {
       clearInterval(interval);
       intervalTime = e.target.value * 60000;
@@ -345,6 +375,6 @@ class App extends React.Component {
   }
 }
 export default App;
-let intervalTime = 600000;
+let intervalTime = '';
 let interval = '';
 
