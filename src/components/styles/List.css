@@ -1,14 +1,75 @@
 .list {
-    background-color: white;
-    width: 30%;
+    width: 40%;
     height: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.radio-text {
+    margin-left: 60px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.radio {
+    margin-right: 10px;
+    height: 17px;
+    width: 17px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.settings-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 35px;
     margin-top: 20px;
 }
 
+.settings-block {
+    top: 130px;
+    border-radius: 10px;
+    width: 400px;
+    left: 370px;
+    z-index: 30;
+    background-color: rgb(233, 238, 227);
+    -webkit-animation: appear 0.5s;
+    -moz-animation:    appear 0.5s;
+    -o-animation:      appear 0.5s;
+    animation:         appear 0.5s; 
+    margin-top: 10px;
+}
+
+.settings-label {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-size: 33px;
+    margin: 0px;
+    color: rgb(118, 123, 131);
+    margin-left: 30px;
+}
+
 .list-item {
-    background-color: rgb(235, 230, 230);
-    height: 200px;
-    margin-top: 20px;
+    -webkit-animation: appear 0.5s;
+    -moz-animation:    appear 0.5s;
+    -o-animation:      appear 0.5s;
+    animation:         appear 0.5s; 
+    background-color: rgb(232, 242, 250);
+    height: 110px;
+    margin-bottom: 40px;
+    width: 90%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 button {
@@ -17,4 +78,139 @@ button {
 
 .settings-block-none {
     display: none;
+}
+
+@-webkit-keyframes appear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @-moz-keyframes appear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @-o-keyframes appear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes appear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+.settings {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.update-settigns { 
+    margin-top: 3px;
+    margin-right: 20px;
+    height: 38px;
+    width: 38px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border: none;
+    transition: all 1s ease;
+    position: relative;
+}
+.fas {
+    font-size: 30px;
+    color: rgb(118, 123, 131);
+}
+
+.update-settigns:hover {
+    transform: rotate(360deg); 
+}
+
+.del-btn-block {
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    width: 15%;
+}
+
+.delete-card {
+    background-color: rgb(232, 242, 250);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    height: 35px;
+}
+
+.fa-times {
+    font-size: 30px;
+    color: rgb(206, 119, 119);
+    transition: all 0.3s ease;
+}
+
+.fa-times:hover {
+    color: rgb(184, 89, 89);
+}
+
+.main-listitem-block {
+    text-align: center;
+    height: 100%;
+    width: 50%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.card-name {
+    margin: 0px;
+    font-size: 25px;
+   
+}
+
+.card-temp {
+    margin: 0px;
+    font-size: 37px;
+}
+
+.upd-info {
+    margin: 0px;
+}
+
+.listitem-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 35%;
+    border-radius: 10px;
+}
+
+.description-weather {
+    font-size: 18px;
+    margin: 0px;
+}
+
+.list-item-main {
+    display: flex;
+    height: 70%;
+    border-radius: 10px;
+}
+
+.more-info {
+    height: 30%;
+    font-size: 17px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color:rgb(142, 142, 197);
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.more-info:hover {
+    background-color: rgb(118, 118, 189);
 }

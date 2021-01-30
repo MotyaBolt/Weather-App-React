@@ -12,7 +12,7 @@ class Display extends React.Component {
                 </div>
                 <div className="display-wrapper">
                     <div className='upd-btn-wrapper'>
-                        <button onClick={this.props.updateDisplayCard} className='update-btn'>Update</button>
+                        <button onClick={this.props.updateDisplayCard} className='update-btn'><i className="fas fa-sync-alt"></i></button>
                     </div>
                     <div className='display-main'>
                         <div className='main'>
@@ -24,6 +24,10 @@ class Display extends React.Component {
                         </div>
                         <div className='main-temp'>
                             <div className='temp-block'>
+                                <div className="temperature-switch">
+                                    <button onClick={this.props.convertToCels} className={this.props.tempConvert === false ? 'celcius-switcher' : 'celcius-switcher-after'}><sup>o</sup>C</button>
+                                    <button onClick={this.props.convertToFahr} className={this.props.tempConvert === true ? 'fahrenheit-switcher' : 'fahrenheit-switcher-after'}><sup>o</sup>F</button>
+                                </div>
                                 <span className='temp'>{this.props.temperature}<sup>o</sup></span>
                                 <p className='feelslike-temp-wrapper'>Feels like: 
                                     <span className='feelslike_temp'> {this.props.feelsLikeTemp}<sup>o</sup></span>
@@ -37,7 +41,7 @@ class Display extends React.Component {
                     </div>
                 </div>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 export default Display;

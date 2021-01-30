@@ -1,6 +1,6 @@
 .display {
     position: relative;
-    width: 70%;
+    width: 60%;
     height: 625px;
     display: flex;
     align-items: center;
@@ -20,6 +20,13 @@
     justify-content: flex-end;
 }
 
+.update-btn {
+    background-color: white;
+    outline: none;
+    border: none;
+    padding: 15px;
+}
+
 .display-main {
     width: 500px;
     height: 410px;
@@ -27,6 +34,7 @@
     justify-content: center;
    
 }
+
 .display-after {
     position: absolute;
     width: 100%;
@@ -63,7 +71,7 @@
 .city-name {
     font-size: 30px;
     margin-bottom: 0px;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .current-date {
@@ -88,10 +96,19 @@
 }
 
 .temp-block {
-    margin-top: 90px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.fa-sync-alt {
+    color: gray;
+    transition: all 1s ease;
+}
+
+.fa-sync-alt:hover {
+    transform: rotate(360deg);
 }
 
 .temp {
@@ -125,6 +142,44 @@
         font-size: 22px;
         color: rgb(158, 93, 93);
     } 
+}
+
+.celcius-switcher {
+    color: black;
+    background-color: white;
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: 25px;
+    border-right: 1px solid black;
+}
+
+.celcius-switcher-after {
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: 19px;
+    background-color: white;
+    color: rgb(90, 87, 87);
+    border-right: 1px solid black;
+}
+
+.fahrenheit-switcher {
+    color: black;
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: 25px;
+    background-color: white;
+}
+
+.fahrenheit-switcher-after {
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: 19px;
+    background-color: white;
+    color: rgb(90, 87, 87);
 }
 
 

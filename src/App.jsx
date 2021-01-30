@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Header from './components/Header';
 import Display from './components/Display';
 import List from './components/List';
@@ -8,7 +8,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
       city: '',
       date: '',
       time: '',
@@ -21,36 +20,39 @@ class App extends React.Component {
       isLoaded: false,
       error: null,
       weatherCards: [],
-      checkedBtnId: ''
+      checkedBtnId: '',
+      tempConvert: false
     }
+    // initialize our functions
     this.fetchData = this.fetchData.bind(this);
-    this.getSityName = this.getSityName.bind(this);
     this.fetchDataEnter = this.fetchDataEnter.bind(this);
     this.moreInfoRequest = this.moreInfoRequest.bind(this);
     this.deleteCards = this.deleteCards.bind(this);
-    this.updateCard = this.updateCard.bind(this);
+    this.updateCards = this.updateCards.bind(this);
     this.getUpdateTime = this.getUpdateTime.bind(this);
     this.newInterval = this.newInterval.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
+    this.convertToCels = this.convertToCels.bind(this);
+    this.convertToFahr = this.convertToFahr.bind(this);
   };
-
+  // fucntion to get localStorage data
   componentDidMount () { 
     if(localStorage.getItem('card') !== null) {
-    let storage = JSON.parse(localStorage.getItem('card'));
-      this.setState({
-        isLoaded: storage.isLoaded,
-        city: storage.city,
-        date: storage.date,
-        time: storage.time,
-        temperature: storage.temperature,
-        feelsLikeTemp: storage.feelsLikeTemp,
-        description: storage.description,
-        humidity: storage.humidity,
-        wind: storage.wind,
-        icon: storage.icon,
-        inputValue: storage.inputValue,
-        weatherCards: storage.weatherCards
-      });
+      let storage = JSON.parse(localStorage.getItem('card'));
+        this.setState({
+          isLoaded: storage.isLoaded,
+          city: storage.city,
+          date: storage.date,
+          time: storage.time,
+          temperature: storage.temperature,
+          feelsLikeTemp: storage.feelsLikeTemp,
+          description: storage.description,
+          humidity: storage.humidity,
+          wind: storage.wind,
+          icon: storage.icon,
+          weatherCards: storage.weatherCards,
+          tempConvert: storage.tempConvert
+        });
     }
     if(localStorage.getItem('updatetime') !== null) {
       let storagetime = localStorage.getItem('updatetime');
@@ -65,7 +67,6 @@ class App extends React.Component {
     }
     else  {
       let radioButtons = document.querySelectorAll('.radio');
-      console.log(intervalTime)
       radioButtons.forEach(item => {
         if(item.value === '10') {
           item.defaultChecked = true
@@ -73,10 +74,10 @@ class App extends React.Component {
         }
       })
     };
-    interval = setInterval(this.updateCard, intervalTime)
+    interval = setInterval(this.updateCards, intervalTime)
   };
-
-  updateCard () {
+  // function to update weather cards in sidebar
+  updateCards () {
     if(this.state.weatherCards.length > 0) {
       this.state.weatherCards.map(currCard => {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currCard[0]}&appid=${APIKEY}`)
@@ -100,21 +101,18 @@ class App extends React.Component {
             currCard[3] = data.weather[0].description;
           });
         });
-        localStorage.setItem("card", JSON.stringify(this.state))
+        localStorage.setItem("card", JSON.stringify(this.state));
+        console.log('cards updated')
         this.updateDisplay();
-        console.log('second')
     }
   };
-
-  getSityName (event) {
-    this.setState ({
-      inputValue: event.target.value
-    })
-  };
-
+  // function to make ajax request on click button "show weather"
   fetchData () {
-    if(this.state.inputValue !== '') {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.inputValue}&appid=${APIKEY}`)
+    let input = document.querySelector('.search-input');
+    input.blur();
+    console.log(input.value)
+    if(input.value !== '') {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${APIKEY}`)
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -124,7 +122,7 @@ class App extends React.Component {
       })
       .then(
         (data) => {
-          if (this.state.inputValue !== '') {
+          if (input.value !== '') {
             if(this.state.weatherCards.length >= 1 && this.state.weatherCards.length < 3) {
               let newCards = this.state.weatherCards.filter(item => item[0] !== data.name);
               this.setState({weatherCards: newCards});
@@ -132,7 +130,7 @@ class App extends React.Component {
             else if(this.state.weatherCards.length > 2) {
               let newCards = this.state.weatherCards.filter(item => item[0] !== data.name);
               this.setState({weatherCards: newCards});
-              newCards.length !== 2 ? this.state.weatherCards.pop() : 
+              newCards.length !== 2  ? this.state.weatherCards.pop() : 
               console.log("we shouldn't delete last card");
             }
             let iconId = data.weather[0].icon;
@@ -166,9 +164,12 @@ class App extends React.Component {
               humidity: data.main.humidity + '%',
               wind: data.wind.speed + ' m/s',
               icon: currentIcon,
-              inputValue: '',
               weatherCards: [[data.name, Math.round(data.main.temp - 273.15), timeNow, data.weather[0].description], ...this.state.weatherCards]
             });
+            input.value = '';
+            let searchbox = document.getElementById('search-list');
+            searchbox.classList.remove('cities-list-after');
+            searchbox.classList.add('cities-list-before');
             localStorage.setItem("card", JSON.stringify(this.state))
           }
         },
@@ -181,13 +182,13 @@ class App extends React.Component {
       })
     }
   };
-
+  // function to make fetchData() on click "enter"
   fetchDataEnter (e) {
     if(e.keyCode === 13) {
       this.fetchData();
     }
   };
-
+  // fucntion to make ajax request on click on current weather card
   moreInfoRequest (currentData) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currentData[0]}&appid=${APIKEY}`)
       .then(response => {
@@ -237,10 +238,10 @@ class App extends React.Component {
               humidity: data.main.humidity + '%',
               wind: data.wind.speed + ' m/s',
               icon: currentIcon,
-              inputValue: '',
-              weatherCards: this.state.weatherCards
+              weatherCards: this.state.weatherCards,
+              tempConvert: false
             });
-            localStorage.setItem("card", JSON.stringify(this.state))
+            localStorage.setItem("card", JSON.stringify(this.state));
         },
       )
       .catch((error) => {
@@ -250,7 +251,7 @@ class App extends React.Component {
         });
       })
   };
-
+  // function to delete current card
   deleteCards (card) {
     let afterDelCards = this.state.weatherCards.filter(item => item !== card)
     this.setState({weatherCards: afterDelCards, isLoaded: false, error: null, inputValue: ''}, 
@@ -258,7 +259,7 @@ class App extends React.Component {
       localStorage.setItem("card", JSON.stringify(this.state))
     });
   };
-
+  // function to get time of automatically updating weather cards
   getUpdateTime (e) {
     console.log(e.target.value)
     this.setState({
@@ -271,11 +272,11 @@ class App extends React.Component {
       this.newInterval()
     }
   };
-
+  // function to start new interval when we click on radio button(10min, 30min, 60min)
   newInterval () {
     interval = setInterval(this.updateCard, intervalTime)
   };
-
+  // function to update display card on click "update button", making ajax request
   updateDisplay () {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${APIKEY}`)
       .then(response => {
@@ -325,7 +326,8 @@ class App extends React.Component {
               humidity: data.main.humidity + '%',
               wind: data.wind.speed + ' m/s',
               icon: currentIcon,
-              weatherCards: this.state.weatherCards
+              weatherCards: this.state.weatherCards,
+              tempConvert: false
             });
             localStorage.setItem("card", JSON.stringify(this.state))
         },
@@ -336,6 +338,24 @@ class App extends React.Component {
           error
         });
       })
+  };
+
+  convertToCels (e) {
+    if(this.state.tempConvert === true) {
+      let celcius = Math.round((this.state.temperature - 32) / 1.8);
+      let feelslike = Math.round((this.state.feelsLikeTemp - 32) / 1.8);
+      this.setState({tempConvert: false, temperature: celcius, feelsLikeTemp: feelslike}, () => 
+      {localStorage.setItem("card", JSON.stringify(this.state))})
+    }
+  }
+
+  convertToFahr (e) {
+    if(this.state.tempConvert === false) {
+      let fahrenheit = Math.round((this.state.temperature * 1.8) + 32);
+      let feelslike = Math.round((this.state.feelsLikeTemp * 1.8) + 32);
+      this.setState({tempConvert: true, temperature: fahrenheit, feelsLikeTemp: feelslike}, () => 
+      {localStorage.setItem("card", JSON.stringify(this.state))})
+    }
   }
 
   render () {
@@ -343,8 +363,6 @@ class App extends React.Component {
       <div className='app'>
           <Header 
             enterClick={this.fetchDataEnter} 
-            getInputValue={this.getSityName} 
-            value={this.state.inputValue} 
             showWeather={this.fetchData}
           />
           <div className='weather-info'>
@@ -356,6 +374,9 @@ class App extends React.Component {
               getTimeUpdate={this.getUpdateTime}
             />
             <Display 
+              tempConvert={this.state.tempConvert}
+              convertToCels={this.convertToCels}
+              convertToFahr={this.convertToFahr}
               updateDisplayCard={this.updateDisplay}
               loaded={this.state.isLoaded} 
               error={this.state.error} 
@@ -372,8 +393,8 @@ class App extends React.Component {
           </div>
       </div>
     )
-  }
-}
+  };
+};
 export default App;
 let intervalTime = '';
 let interval = '';

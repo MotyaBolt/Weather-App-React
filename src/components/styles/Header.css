@@ -10,6 +10,36 @@
     box-shadow: 0 4px 5px 0 rgb(223, 222, 222);
 }
 
+.cities-list-before {
+   display: none;
+}
+
+.cities-list-after {
+    width: 263px;
+    height: 300px;
+    overflow: auto;
+    z-index: 20;
+    background-color:rgb(246, 246, 251); 
+    box-shadow : 0px 8px 16px 0px rgba(0,0,0,0.2);
+    position: absolute;
+    outline: none;
+}
+
+.search-item {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    background-color: rgb(246, 246, 251);
+    height: 35px;
+    font-size: 19px;
+    padding-left: 7px;
+    cursor: pointer;
+}
+
+.search-item:hover {
+    background-color: rgb(222, 222, 233);
+}
+
 .header-main {
     display: flex;
     align-items: center;
