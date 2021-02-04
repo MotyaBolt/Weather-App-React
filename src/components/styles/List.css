@@ -1,5 +1,5 @@
 .list {
-    width: 40%;
+    width: 50%;
     height: 100%;
     margin-top: 20px;
     display: flex;
@@ -7,11 +7,20 @@
     align-items: center;
 }
 
+.list-none {
+    width: 0;
+    overflow: hidden;
+}
+
 .radio-text {
-    margin-left: 60px;
+    margin-left: 90px;
     font-size: 18px;
     display: flex;
     align-items: center;
+}
+
+label {
+    cursor: pointer;
 }
 
 .radio {
@@ -27,22 +36,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 35px;
-    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-top: 15px;
 }
 
 .settings-block {
-    top: 130px;
-    border-radius: 10px;
+    opacity: 1;
+    border-radius: 0px;
     width: 400px;
-    left: 370px;
-    z-index: 30;
-    background-color: rgb(233, 238, 227);
-    -webkit-animation: appear 0.5s;
-    -moz-animation:    appear 0.5s;
-    -o-animation:      appear 0.5s;
-    animation:         appear 0.5s; 
+    height: 200px;
     margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(233, 238, 227);
+    -webkit-animation: appear 0.3s;
+    -moz-animation:    appear 0.3s;
+    -o-animation:      appear 0.3s;
+    animation:         appear 0.3s; 
 }
 
 .settings-label {
@@ -55,21 +64,19 @@
     font-size: 33px;
     margin: 0px;
     color: rgb(118, 123, 131);
-    margin-left: 30px;
+    margin-right: 15px;
 }
 
 .list-item {
-    -webkit-animation: appear 0.5s;
-    -moz-animation:    appear 0.5s;
-    -o-animation:      appear 0.5s;
-    animation:         appear 0.5s; 
     background-color: rgb(232, 242, 250);
     height: 110px;
     margin-bottom: 40px;
-    width: 90%;
-    border-radius: 10px;
+    width: 500px;
+    border-radius: 0px;
     display: flex;
     flex-direction: column;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    outline: none;
 }
 
 button {
@@ -77,22 +84,114 @@ button {
 }
 
 .settings-block-none {
-    display: none;
+    -webkit-animation: disappear 0.3s;
+    -moz-animation:    disappear 0.3s;
+    -o-animation:      disappear 0.3s;
+    animation:         disappear 0.3s;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    border-radius: 0px;
+    width: 400px;
+    margin-top: 10px;
+    background-color: rgb(233, 238, 227);
 }
 
+@-webkit-keyframes disappear {
+    0%  {   
+        height: 200px;
+        opacity: 1;     
+        }
+    100% { 
+            height: 0;
+            opacity: 0;
+         }
+  }
+  @-moz-keyframes disappear {
+    0%  {   
+        height: 200px;
+        opacity: 1;     
+    }   
+    100% { 
+        height: 0;
+        opacity: 0;
+     }
+  }
+  @-o-keyframes disappear {
+    0%  {   
+        height: 200px;
+        opacity: 1;     
+    }
+    100% { 
+        height: 0;
+        opacity: 0;
+     }
+  }
+  @keyframes disappear {
+    0%  {   
+        height: 200px;
+        opacity: 1;  
+    }
+    100% { 
+        height: 0;
+        opacity: 0;
+     }
+  }
+
 @-webkit-keyframes appear {
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
+    0%  { 
+            opacity: 0; 
+            height: 0;
+        }
+    100%{ 
+            opacity: 1;
+            height: 200px;
+        }
   }
   @-moz-keyframes appear {
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
+    0%  { 
+        opacity: 0; 
+        height: 0;
+    }
+    100%{ 
+        opacity: 1;
+        height: 200px;
+    }   
   }
   @-o-keyframes appear {
+    0%  { 
+        opacity: 0; 
+        height: 0;
+    }
+    100%{ 
+        opacity: 1;
+        height: 200px;
+    }   
+  }
+  @keyframes appear {
+    0%  { 
+        opacity: 0; 
+        height: 0;
+    }
+    100%{ 
+        opacity: 1;
+        height: 200px;
+    }   
+  }
+
+  @-webkit-keyframes listappear {
     0%   { opacity: 0; }
     100% { opacity: 1; }
   }
-  @keyframes appear {
+  @-moz-keyframes listappear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @-o-keyframes listappear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes listappear {
     0%   { opacity: 0; }
     100% { opacity: 1; }
   }
@@ -101,13 +200,12 @@ button {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 10px;
 }
 
 .update-settigns { 
     margin-top: 3px;
-    margin-right: 20px;
     height: 38px;
     width: 38px;
     background-color: white;
@@ -130,7 +228,7 @@ button {
 
 .del-btn-block {
     height: 100%;
-    border-radius: 10px;
+    border-radius: 0px;
     display: flex;
     justify-content: flex-end;
     width: 15%;
@@ -139,13 +237,13 @@ button {
 .delete-card {
     background-color: rgb(232, 242, 250);
     border: none;
-    border-radius: 10px;
+    border-radius: 0px;
     outline: none;
     height: 35px;
 }
 
 .fa-times {
-    font-size: 30px;
+    font-size: 26px;
     color: rgb(206, 119, 119);
     transition: all 0.3s ease;
 }
@@ -158,7 +256,7 @@ button {
     text-align: center;
     height: 100%;
     width: 50%;
-    border-radius: 10px;
+    border-radius: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -186,7 +284,7 @@ button {
     align-items: center;
     height: 100%;
     width: 35%;
-    border-radius: 10px;
+    border-radius: 0px;
 }
 
 .description-weather {
@@ -197,13 +295,13 @@ button {
 .list-item-main {
     display: flex;
     height: 70%;
-    border-radius: 10px;
+    border-radius: 0px;
 }
 
 .more-info {
     height: 30%;
     font-size: 17px;
-    border-radius: 10px;
+    border-radius: 0px;
     border: none;
     outline: none;
     background-color:rgb(142, 142, 197);
@@ -214,3 +312,18 @@ button {
 .more-info:hover {
     background-color: rgb(118, 118, 189);
 }
+
+.item-enter {
+    opacity: 0;
+  }
+  .item-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-out;
+  }
+  .item-exit {
+    opacity: 1;
+  }
+  .item-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+  }

@@ -1,11 +1,18 @@
 .display {
     position: relative;
-    width: 60%;
+    width: 50%;
     height: 625px;
     display: flex;
     align-items: center;
     justify-content: center;
-   
+}
+
+.display-none {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 625px;
 }
 
 .display-wrapper {
@@ -43,7 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    font-size: 28px;
     color: rgb(158, 93, 93);
 }
 

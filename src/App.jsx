@@ -21,7 +21,8 @@ class App extends React.Component {
       error: null,
       weatherCards: [],
       checkedBtnId: '',
-      tempConvert: false
+      tempConvert: false, 
+      globalTempConvert: false
     }
     // initialize our functions
     this.fetchData = this.fetchData.bind(this);
@@ -34,6 +35,10 @@ class App extends React.Component {
     this.updateDisplay = this.updateDisplay.bind(this);
     this.convertToCels = this.convertToCels.bind(this);
     this.convertToFahr = this.convertToFahr.bind(this);
+    this.cityItemClick = this.cityItemClick.bind(this);
+    this.globalChangeToCels = this.globalChangeToCels.bind(this);
+    this.globalChangeToFahr = this.globalChangeToFahr.bind(this);
+    this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
   };
   // fucntion to get localStorage data
   componentDidMount () { 
@@ -51,7 +56,8 @@ class App extends React.Component {
           wind: storage.wind,
           icon: storage.icon,
           weatherCards: storage.weatherCards,
-          tempConvert: storage.tempConvert
+          tempConvert: storage.tempConvert,
+          globalTempConvert: storage.globalTempConvert
         });
     }
     if(localStorage.getItem('updatetime') !== null) {
@@ -96,13 +102,16 @@ class App extends React.Component {
             : timeNow = date.getHours() + ':' + date.getMinutes();
             date.getMinutes() < 10 ? timeNow = date.getHours() + ':' + '0'+ date.getMinutes() 
             : timeNow = date.getHours() + ':' + date.getMinutes();
-            currCard[1] = Math.round(data.main.temp - 273.15);
+            if(this.state.globalTempConvert === true) {
+              currCard[1] = Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32);    
+            } else {
+              currCard[1] = Math.round(data.main.temp - 273.15)
+            }
             currCard[2] = timeNow;
             currCard[3] = data.weather[0].description;
           });
         });
         localStorage.setItem("card", JSON.stringify(this.state));
-        console.log('cards updated')
         this.updateDisplay();
     }
   };
@@ -110,7 +119,6 @@ class App extends React.Component {
   fetchData () {
     let input = document.querySelector('.search-input');
     input.blur();
-    console.log(input.value)
     if(input.value !== '') {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${APIKEY}`)
       .then(response => {
@@ -153,19 +161,35 @@ class App extends React.Component {
             : currentTime = newDate.getHours() + ':' + newDate.getMinutes();
             let options = { month: 'long', day: 'numeric'};
             let currentDate = new Intl.DateTimeFormat('en-US', options).format(newDate);
+            let tempToWeatherCards = null;
+            this.state.globalTempConvert === true ? tempToWeatherCards =  Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)   
+            : tempToWeatherCards = Math.round(data.main.temp - 273.15);
+            let cardId = '';
+            cardId = String(data.weather[0].id)
+            console.log(cardId);
             this.setState({
               isLoaded: true,
               city: data.name,
               date: currentDate,
               time: currentTime,
-              temperature: Math.round(data.main.temp - 273.15),
-              feelsLikeTemp: Math.round(data.main.feels_like - 273.15),
               description: data.weather[0].description,
               humidity: data.main.humidity + '%',
               wind: data.wind.speed + ' m/s',
               icon: currentIcon,
-              weatherCards: [[data.name, Math.round(data.main.temp - 273.15), timeNow, data.weather[0].description], ...this.state.weatherCards]
+              weatherCards: [[data.name, tempToWeatherCards, timeNow, data.weather[0].description, cardId], ...this.state.weatherCards]
             });
+            if(this.state.globalTempConvert === true) {
+              this.setState({
+                temperature: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32),
+                feelsLikeTemp: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)    
+              });
+            }
+            else {
+              this.setState({
+                temperature: Math.round(data.main.temp - 273.15),
+                feelsLikeTemp: Math.round(data.main.feels_like - 273.15)
+              })
+            }
             input.value = '';
             let searchbox = document.getElementById('search-list');
             searchbox.classList.remove('cities-list-after');
@@ -212,7 +236,11 @@ class App extends React.Component {
               if (item === currentData) {
                 item[3] = data.weather[0].description
                 item[2] = timeNow;
-                item[1] = Math.round(data.main.temp - 273.15)
+                if(this.state.globalTempConvert === true) {
+                  item[1] = Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32);   
+                } else {
+                  item[1] = Math.round(data.main.temp - 273.15)
+                }
               }
             });
             let localTime = date.getTime();
@@ -232,15 +260,34 @@ class App extends React.Component {
               city: data.name,
               date: currentDate,
               time: currentTime,
-              temperature: Math.round(data.main.temp - 273.15),
-              feelsLikeTemp: Math.round(data.main.feels_like - 273.15),
               description: data.weather[0].description,
               humidity: data.main.humidity + '%',
               wind: data.wind.speed + ' m/s',
               icon: currentIcon,
-              weatherCards: this.state.weatherCards,
-              tempConvert: false
+              weatherCards: this.state.weatherCards
             });
+            if(this.state.globalTempConvert === true) {
+              if(this.state.tempConvert === false) {
+                this.setState({
+                  tempConvert: true
+                })
+              }
+              this.setState({
+                temperature: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32),
+                feelsLikeTemp: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)    
+              });
+            }
+            else {
+              if(this.state.tempConvert === true) {
+                this.setState({
+                  tempConvert: false
+                })
+              }
+              this.setState({
+                temperature: Math.round(data.main.temp - 273.15),
+                feelsLikeTemp: Math.round(data.main.feels_like - 273.15)
+              })
+            }
             localStorage.setItem("card", JSON.stringify(this.state));
         },
       )
@@ -254,7 +301,44 @@ class App extends React.Component {
   // function to delete current card
   deleteCards (card) {
     let afterDelCards = this.state.weatherCards.filter(item => item !== card)
-    this.setState({weatherCards: afterDelCards, isLoaded: false, error: null, inputValue: ''}, 
+    if(this.state.weatherCards.indexOf(card) === 2 || this.state.weatherCards.indexOf(card) === 1) {
+      let preventCardIndex = this.state.weatherCards.indexOf(card) - 1;
+      let preventCard = this.state.weatherCards[preventCardIndex];
+      let chosenCardIndex = null;
+      this.state.weatherCards.map(item => {
+        if(this.state.city === item[0]) {
+          chosenCardIndex = this.state.weatherCards.indexOf(item)
+        }
+      });
+      if (chosenCardIndex !== 0) {
+        this.setState({city: preventCard[0]},
+          () => {
+            this.updateDisplay();
+          })
+      }
+    }
+    else {
+      if (this.state.weatherCards.length > 1) {
+          let nextCardIndex = this.state.weatherCards.indexOf(card) + 1;
+          let nextCard = this.state.weatherCards[nextCardIndex];
+          let chosenCardIndex = null;
+          this.state.weatherCards.map(item => {
+            if(this.state.city === item[0]) {
+              chosenCardIndex = this.state.weatherCards.indexOf(item)
+            }
+          });
+          if (chosenCardIndex !== 2) {
+            this.setState({city: nextCard[0]},
+            () => {
+              this.updateDisplay();
+            })
+          }
+      }
+      else {
+        this.setState({isLoaded: false, error: false});
+      };
+    };
+    this.setState({weatherCards: afterDelCards}, 
     () => {
       localStorage.setItem("card", JSON.stringify(this.state))
     });
@@ -267,6 +351,7 @@ class App extends React.Component {
       () => {localStorage.setItem("updatetime", this.state.checkedBtnId)
     });
     if(this.state.weatherCards.length > 0) {
+      this.updateCards();
       clearInterval(interval);
       intervalTime = e.target.value * 60000;
       this.newInterval()
@@ -300,7 +385,11 @@ class App extends React.Component {
               if (item[0] === this.state.city) {
                 item[3] = data.weather[0].description
                 item[2] = timeNow;
-                item[1] = Math.round(data.main.temp - 273.15)
+                if(this.state.globalTempConvert === true) {
+                  item[1] = Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32);   
+                } else {
+                  item[1] = Math.round(data.main.temp - 273.15)
+                }
               }
             });
             let localTime = date.getTime();
@@ -320,15 +409,34 @@ class App extends React.Component {
               city: data.name,
               date: currentDate,
               time: currentTime,
-              temperature: Math.round(data.main.temp - 273.15),
-              feelsLikeTemp: Math.round(data.main.feels_like - 273.15),
               description: data.weather[0].description,
               humidity: data.main.humidity + '%',
               wind: data.wind.speed + ' m/s',
               icon: currentIcon,
               weatherCards: this.state.weatherCards,
-              tempConvert: false
             });
+            if(this.state.globalTempConvert === true) {
+              if(this.state.tempConvert === false) {
+                this.setState({
+                  tempConvert: true
+                })
+              }
+               this.setState({
+                temperature: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32),
+                feelsLikeTemp: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)    
+              });
+            }
+            else {
+              if(this.state.tempConvert === true) {
+                this.setState({
+                  tempConvert: false
+                })
+              }
+              this.setState({
+                temperature: Math.round(data.main.temp - 273.15),
+                feelsLikeTemp: Math.round(data.main.feels_like - 273.15)
+              })
+            }
             localStorage.setItem("card", JSON.stringify(this.state))
         },
       )
@@ -339,7 +447,7 @@ class App extends React.Component {
         });
       })
   };
-
+  // function to convert temperature from celcius to fahrenheit
   convertToCels (e) {
     if(this.state.tempConvert === true) {
       let celcius = Math.round((this.state.temperature - 32) / 1.8);
@@ -348,7 +456,7 @@ class App extends React.Component {
       {localStorage.setItem("card", JSON.stringify(this.state))})
     }
   }
-
+  // function to convert temperature from fahrenheit to celcius
   convertToFahr (e) {
     if(this.state.tempConvert === false) {
       let fahrenheit = Math.round((this.state.temperature * 1.8) + 32);
@@ -357,16 +465,87 @@ class App extends React.Component {
       {localStorage.setItem("card", JSON.stringify(this.state))})
     }
   }
+  // click handler in list of cities in Heade.jsx, input, dropdown list
+  cityItemClick (currItem) {
+    let input = document.querySelector('.search-input');
+    input.value = currItem;
+    this.fetchData();
+    let searchbox = document.getElementById('search-list');
+    searchbox.classList.remove('cities-list-after');
+    searchbox.classList.add('cities-list-before');
+  };
+
+  globalChangeToCels () {
+    if(this.state.globalTempConvert === true) {
+      this.state.weatherCards.map(item => {
+        item[1] = Math.round((item[1] - 32) / 1.8)
+      })
+      this.setState({
+        globalTempConvert: false
+      }, () => 
+      {localStorage.setItem("card", JSON.stringify(this.state))})
+      if(this.state.tempConvert === true) {
+        let celcius = Math.round((this.state.temperature - 32) / 1.8);
+        let feelslike = Math.round((this.state.feelsLikeTemp - 32) / 1.8);
+        this.setState({
+          globalTempConvert: false,
+          tempConvert: false,
+          temperature: celcius, 
+          feelsLikeTemp: feelslike
+        }, () => 
+        {localStorage.setItem("card", JSON.stringify(this.state))})
+      }
+    }
+  };
+
+  globalChangeToFahr () {
+    if(this.state.globalTempConvert === false) {
+      this.setState({
+        globalTempConvert: true
+      }, () => 
+      {localStorage.setItem("card", JSON.stringify(this.state))})
+      this.state.weatherCards.map(item => {
+        item[1] = Math.round((item[1] * 1.8) + 32)
+      })
+      if(this.state.tempConvert !== true) {
+        let fahrenheit = Math.round((this.state.temperature * 1.8) + 32);
+        let feelslike = Math.round((this.state.feelsLikeTemp * 1.8) + 32);
+        this.setState({
+          globalTempConvert: true,
+          temperature: fahrenheit, 
+          tempConvert: true,
+          feelsLikeTemp: feelslike
+        }, () => 
+        {localStorage.setItem("card", JSON.stringify(this.state))})
+      }
+    }
+  };
+
+  handleOnDragEnd (result) {
+    if (!result.destination) return;
+    const items = Array.from(this.state.weatherCards);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    console.log(items)
+    this.setState ({
+      weatherCards: items
+    })
+  };
 
   render () {
     return (
       <div className='app'>
           <Header 
+            globalTempConvert={this.state.globalTempConvert}
+            globalChangeTempCels={this.globalChangeToCels}
+            globalChangeTempFahr={this.globalChangeToFahr}
+            cityItemClick={this.cityItemClick}
             enterClick={this.fetchDataEnter} 
             showWeather={this.fetchData}
           />
           <div className='weather-info'>
             <List
+              handleOnDragEnd={this.handleOnDragEnd}
               deleteCard={this.deleteCards} 
               moreInfo={this.moreInfoRequest} 
               cards={this.state.weatherCards}
@@ -374,6 +553,7 @@ class App extends React.Component {
               getTimeUpdate={this.getUpdateTime}
             />
             <Display 
+              cards={this.state.weatherCards}
               tempConvert={this.state.tempConvert}
               convertToCels={this.convertToCels}
               convertToFahr={this.convertToFahr}

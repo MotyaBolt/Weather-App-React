@@ -6,9 +6,9 @@ class Display extends React.Component {
     }
     render () {
         return (
-            <div className='display'>
+            <div className={this.props.cards.length > 0 ? 'display' : "display-none"}>
                 <div className={this.props.loaded === true ? 'display-before' : 'display-after'}>
-                    <p className='starting-message'>{this.props.error ? 'please enter correct city name': 'Please choose a city from history or enter a city name'}</p> 
+                    <p className='starting-message'>{this.props.error ? 'Please enter correct city name': 'Please enter a city name'}</p> 
                 </div>
                 <div className="display-wrapper">
                     <div className='upd-btn-wrapper'>
