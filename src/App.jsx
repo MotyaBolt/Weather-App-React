@@ -42,7 +42,6 @@ class App extends React.Component {
   };
   // fucntion to get localStorage data
   componentDidMount () { 
-    localStorage.clear()
     if(localStorage.getItem('card') !== null) {
       let storage = JSON.parse(localStorage.getItem('card'));
         this.setState({
