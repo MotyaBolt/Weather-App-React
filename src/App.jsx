@@ -359,7 +359,7 @@ class App extends React.Component {
   };
   // function to start new interval when we click on radio button(10min, 30min, 60min)
   newInterval () {
-    interval = setInterval(this.updateCard, intervalTime)
+    interval = setInterval(this.updateCards, intervalTime)
   };
   // function to update display card on click "update button", making ajax request
   updateDisplay () {
