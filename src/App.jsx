@@ -179,7 +179,7 @@ class App extends React.Component {
             this.state.globalTempConvert === true ? tempToWeatherCards =  Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)   
             : tempToWeatherCards = Math.round(data.main.temp - 273.15);
             let cardId = '';
-            cardId = String(data.weather[0].id)
+            cardId = String(data.id)
             this.setState({
               isLoaded: true,
               city: data.name,
