@@ -63,7 +63,10 @@ class App extends React.Component {
         }, () => {
           this.startInterval();
         })
-    };
+    }
+    else {
+      this.startInterval();
+    }
   };
   // start update interval
   startInterval () {
