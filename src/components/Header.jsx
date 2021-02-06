@@ -59,9 +59,8 @@ function Header (props) {
             searchbox.classList.add("cities-list-before");
         }
     }
-
         return (
-            <header  className="header">
+            <header className={"header"}>
                 <h1 className="page-name">MyWeather</h1>
                 <div  className="header-main">
                     <div className="search-block">
@@ -85,5 +84,5 @@ function Header (props) {
                 </div>
             </header>
         )
-}
+};
 export default Header;

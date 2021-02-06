@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import Header from './components/Header';
 import Display from './components/Display';
 import List from './components/List';
+import Footer from './components/Footer';
 import './App.css'
 const APIKEY = 'b0e658f81fbdeeaa452333e7e504314a';
 class App extends React.Component {
@@ -31,6 +32,7 @@ class App extends React.Component {
     this.deleteCards = this.deleteCards.bind(this);
     this.updateCards = this.updateCards.bind(this);
     this.getUpdateTime = this.getUpdateTime.bind(this);
+    this.startInterval = this.startInterval.bind(this);
     this.newInterval = this.newInterval.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
     this.convertToCels = this.convertToCels.bind(this);
@@ -41,7 +43,7 @@ class App extends React.Component {
     this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
   };
   // fucntion to get localStorage data
-  componentDidMount () { 
+  componentDidMount () {
     if(localStorage.getItem('card') !== null) {
       let storage = JSON.parse(localStorage.getItem('card'));
         this.setState({
@@ -58,8 +60,13 @@ class App extends React.Component {
           weatherCards: storage.weatherCards,
           tempConvert: storage.tempConvert,
           globalTempConvert: storage.globalTempConvert
-        });
-    }
+        }, () => {
+          this.startInterval();
+        })
+    };
+  };
+  // start update interval
+  startInterval () {
     if(localStorage.getItem('updatetime') !== null) {
       let storagetime = localStorage.getItem('updatetime');
       let radioButtons = document.querySelectorAll('.radio');
@@ -70,6 +77,8 @@ class App extends React.Component {
         }
       });
       intervalTime = storagetime * 60000;
+      this.updateCards();
+      interval = setInterval(this.updateCards, intervalTime);
     }
     else  {
       let radioButtons = document.querySelectorAll('.radio');
@@ -78,10 +87,12 @@ class App extends React.Component {
           item.defaultChecked = true
           intervalTime = item.value * 60000;
         }
-      })
+    })
+      this.updateCards();
+      interval = setInterval(this.updateCards, intervalTime);
     };
-    interval = setInterval(this.updateCards, intervalTime)
   };
+   
   // function to update weather cards in sidebar
   updateCards () {
     if(this.state.weatherCards.length > 0) {
@@ -100,7 +111,7 @@ class App extends React.Component {
             let timeNow = 0;
             date.getHours() < 10 ? timeNow = '0' + date.getHours() + ':' + date.getMinutes()
             : timeNow = date.getHours() + ':' + date.getMinutes();
-            date.getMinutes() < 10 ? timeNow = date.getHours() + ':' + '0'+ date.getMinutes() 
+            date.getMinutes() < 10 ? timeNow = date.getHours() + ':' + '0' + date.getMinutes() 
             : timeNow = date.getHours() + ':' + date.getMinutes();
             if(this.state.globalTempConvert === true) {
               currCard[1] = Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32);    
@@ -166,7 +177,6 @@ class App extends React.Component {
             : tempToWeatherCards = Math.round(data.main.temp - 273.15);
             let cardId = '';
             cardId = String(data.weather[0].id)
-            console.log(cardId);
             this.setState({
               isLoaded: true,
               city: data.name,
@@ -181,7 +191,7 @@ class App extends React.Component {
             if(this.state.globalTempConvert === true) {
               this.setState({
                 temperature: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32),
-                feelsLikeTemp: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)    
+                feelsLikeTemp: Math.round((Math.round(data.main.feels_like - 273.15) * 1.8) + 32)    
               });
             }
             else {
@@ -274,7 +284,7 @@ class App extends React.Component {
               }
               this.setState({
                 temperature: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32),
-                feelsLikeTemp: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)    
+                feelsLikeTemp: Math.round((Math.round(data.main.feels_like - 273.15) * 1.8) + 32)    
               });
             }
             else {
@@ -345,7 +355,6 @@ class App extends React.Component {
   };
   // function to get time of automatically updating weather cards
   getUpdateTime (e) {
-    console.log(e.target.value)
     this.setState({
       checkedBtnId: e.target.value}, 
       () => {localStorage.setItem("updatetime", this.state.checkedBtnId)
@@ -353,9 +362,10 @@ class App extends React.Component {
     if(this.state.weatherCards.length > 0) {
       this.updateCards();
       clearInterval(interval);
+      interval = '';
       intervalTime = e.target.value * 60000;
       this.newInterval()
-    }
+    };
   };
   // function to start new interval when we click on radio button(10min, 30min, 60min)
   newInterval () {
@@ -423,7 +433,7 @@ class App extends React.Component {
               }
                this.setState({
                 temperature: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32),
-                feelsLikeTemp: Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)    
+                feelsLikeTemp: Math.round((Math.round(data.main.feels_like - 273.15) * 1.8) + 32)    
               });
             }
             else {
@@ -474,7 +484,7 @@ class App extends React.Component {
     searchbox.classList.remove('cities-list-after');
     searchbox.classList.add('cities-list-before');
   };
-
+  // global change to celcius
   globalChangeToCels () {
     if(this.state.globalTempConvert === true) {
       this.state.weatherCards.map(item => {
@@ -497,7 +507,7 @@ class App extends React.Component {
       }
     }
   };
-
+  // global change to fahrenheit
   globalChangeToFahr () {
     if(this.state.globalTempConvert === false) {
       this.setState({
@@ -520,16 +530,15 @@ class App extends React.Component {
       }
     }
   };
-
+  // drag and drop cards 
   handleOnDragEnd (result) {
     if (!result.destination) return;
     const items = Array.from(this.state.weatherCards);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    console.log(items)
     this.setState ({
       weatherCards: items
-    })
+    }, () => {localStorage.setItem("card", JSON.stringify(this.state))})
   };
 
   render () {
@@ -571,6 +580,7 @@ class App extends React.Component {
               windSpeed={this.state.wind}
             />
           </div>
+          <Footer/>
       </div>
     )
   };

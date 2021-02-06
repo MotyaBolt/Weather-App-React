@@ -1,7 +1,7 @@
 .display {
     position: relative;
     width: 50%;
-    height: 625px;
+    max-height: 89vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,8 +12,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 625px;
+    height: 89vh;
+    z-index: -5;
 }
+
 
 .display-wrapper {
     height: 460px;
@@ -45,7 +47,7 @@
 .display-after {
     position: absolute;
     width: 100%;
-    height: 500px;
+    height: 89vh;
     background-color: white;
     display: flex;
     align-items: center;
@@ -137,20 +139,6 @@
     margin-bottom: 0px;
 }
 
-@media screen and (max-width: 600px) { 
-    .display-after {
-        position: absolute;
-        width: 100%;
-        height: 500px;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        color: rgb(158, 93, 93);
-    } 
-}
-
 .celcius-switcher {
     color: black;
     background-color: white;
@@ -188,6 +176,7 @@
     background-color: white;
     color: rgb(90, 87, 87);
 }
+
 
 
 
