@@ -63,7 +63,9 @@ class App extends React.Component {
         }, () => {
           this.startInterval();
         })
-    };
+    } else {
+      this.startInterval();
+    }
   };
   // start update interval
   startInterval () {
@@ -149,8 +151,7 @@ class App extends React.Component {
             else if(this.state.weatherCards.length > 2) {
               let newCards = this.state.weatherCards.filter(item => item[0] !== data.name);
               this.setState({weatherCards: newCards});
-              newCards.length !== 2  ? this.state.weatherCards.pop() : 
-              console.log("we shouldn't delete last card");
+              newCards.length !== 2  ? this.state.weatherCards.pop() : console.log('Hello!')
             }
             let iconId = data.weather[0].icon;
             let currentIcon = `http://openweathermap.org/img/wn/${iconId}.png`
@@ -176,7 +177,7 @@ class App extends React.Component {
             this.state.globalTempConvert === true ? tempToWeatherCards =  Math.round((Math.round(data.main.temp - 273.15) * 1.8) + 32)   
             : tempToWeatherCards = Math.round(data.main.temp - 273.15);
             let cardId = '';
-            cardId = String(data.weather[0].id)
+            cardId = String(data.id)
             this.setState({
               isLoaded: true,
               city: data.name,
