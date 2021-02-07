@@ -95,7 +95,6 @@ class App extends React.Component {
       interval = setInterval(this.updateCards, intervalTime);
     };
   };
-   
   // function to update weather cards in sidebar
   updateCards () {
     if(this.state.weatherCards.length > 0) {
@@ -144,16 +143,12 @@ class App extends React.Component {
       })
       .then(
         (data) => {
-          if (input.value !== '') {
-            if(this.state.weatherCards.length >= 1 && this.state.weatherCards.length < 3) {
-              let newCards = this.state.weatherCards.filter(item => item[0] !== data.name);
-              this.setState({weatherCards: newCards});
-            }
-            else if(this.state.weatherCards.length > 2) {
-              let newCards = this.state.weatherCards.filter(item => item[0] !== data.name);
-              this.setState({weatherCards: newCards});
-              newCards.length !== 2  ? this.state.weatherCards.pop() : console.log('Hello!')
-            }
+          let extraCard = '';
+          this.state.weatherCards.map(item => {
+              extraCard = this.state.weatherCards.filter(item => item[0] === data.name);
+          })
+          if (input.value !== '' && extraCard.length < 1) {
+            if (this.state.weatherCards.length > 2) {this.state.weatherCards.pop()}
             let iconId = data.weather[0].icon;
             let currentIcon = `http://openweathermap.org/img/wn/${iconId}.png`
             let date = new Date();
@@ -206,7 +201,9 @@ class App extends React.Component {
             let searchbox = document.getElementById('search-list');
             searchbox.classList.remove('cities-list-after');
             searchbox.classList.add('cities-list-before');
-            localStorage.setItem("card", JSON.stringify(this.state))
+            localStorage.setItem("card", JSON.stringify(this.state));
+          } else {
+            input.value = ''
           }
         },
       )

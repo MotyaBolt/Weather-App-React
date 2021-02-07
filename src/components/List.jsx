@@ -53,7 +53,7 @@ class List extends React.Component {
                                     >
                                     <Draggable draggableId={item[4]} index={index} key={item[4]}>
                                     {(provided) => (
-                                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} key={index} className="list-item">
+                                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} key={item[4]} className="list-item">
                                         <div className="list-item-main">
                                             <div className="main-listitem-block">
                                                 <h2 className="card-name">{item[0]}</h2>
