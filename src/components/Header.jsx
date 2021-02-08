@@ -17,10 +17,11 @@ function Header (props) {
             })
             .then((data) => {
                 let citiesData = data;
+                let rightValue = searchValue.replace(/[^a-zA-Z0-9А-Яа-я\s]/g, "");
                 let filteredCities = citiesData.filter(item => {
-                    let regex = new RegExp(`^${searchValue}`, "gi")
-                    return item.name.match(regex);
-                })
+                    let regex = new RegExp(`^${rightValue}`, "gi");
+                    return item.name.match(regex)
+                });
                 changeList(filteredCities)
             })
         }
