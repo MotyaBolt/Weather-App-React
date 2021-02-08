@@ -91,6 +91,7 @@
     font-size: 19px;
     padding-left: 7px;
     cursor: pointer;
+    outline: none;
 }
 
 .search-item:hover {
