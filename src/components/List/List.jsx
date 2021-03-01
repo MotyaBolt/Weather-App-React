@@ -1,7 +1,9 @@
 import React from "react";
-import "./styles/List.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+import "../../styles/List.css";
+
 class List extends React.Component {
     constructor(props) {
         super(props);

@@ -1,10 +1,12 @@
 import React from 'react';
-import Header from './components/Header';
-import Display from './components/Display';
-import List from './components/List';
-import Footer from './components/Footer';
-import './App.css'
+import Header from '../Header/Header';
+import Display from '../Display/Display';
+import List from '../List/List';
+import Footer from '../Footer/Footer';
+import '../App/App.css'
+
 const APIKEY = 'b0e658f81fbdeeaa452333e7e504314a';
+
 class App extends React.Component {
   constructor(props) {
     super(props);

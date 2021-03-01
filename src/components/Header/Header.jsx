@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from "react";
 import debounce from "lodash.debounce";
-import "./styles/Header.css";
+
+import "../../styles/Header.css";
+
 let searchValue = "";
 function Header (props) {
     const [citylist, changeList] = useState("")

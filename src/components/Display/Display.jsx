@@ -1,5 +1,7 @@
 import React from 'react';
-import './styles/Display.css';
+
+import '../../styles/Display.css';
+
 class Display extends React.Component {
     constructor(props) {
         super(props);
