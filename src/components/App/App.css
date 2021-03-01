@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    min-height:100%;
+}
+
+.weather-info {
+    display: flex;
+    min-height: 89vh;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+.app {
+    min-height: 100vh;
+}
+
+
+
