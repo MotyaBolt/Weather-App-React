@@ -1,0 +1,351 @@
+.list {
+    width: 50%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.list-none {
+    width: 0;
+    overflow: hidden;
+}
+
+.radio-text {
+    margin-left: 90px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+label {
+    cursor: pointer;
+}
+
+.radio {
+    margin-right: 10px;
+    height: 17px;
+    width: 17px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.settings-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 35px;
+}
+
+.settings-block {
+    opacity: 1;
+    border-radius: 0px;
+    width: 400px;
+    height: 200px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    background-color: rgb(233, 238, 227);
+    -webkit-animation: appear 0.3s;
+    -moz-animation:    appear 0.3s;
+    -o-animation:      appear 0.3s;
+    animation:         appear 0.3s; 
+}
+
+.settings-label {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-size: 33px;
+    margin: 0px;
+    color: rgb(118, 123, 131);
+    margin-right: 15px;
+
+}
+
+.list-item {
+    background-color: rgb(232, 242, 250);
+    height: 110px;
+    margin-bottom: 40px;
+    width: 500px;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.settings-block-none {
+    -webkit-animation: disappear 0.3s;
+    -moz-animation:    disappear 0.3s;
+    -o-animation:      disappear 0.3s;
+    animation:         disappear 0.3s;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    margin-top: 0px;
+    border-radius: 0px;
+    width: 400px;
+    background-color: rgb(233, 238, 227);
+}
+
+@-webkit-keyframes disappear {
+    0%  {   
+        height: 200px;
+        opacity: 1;  
+        margin-top: 15px;   
+        }
+    100% { 
+            height: 0;
+            opacity: 0;
+            margin-top: 0px;
+         }
+  }
+  @-moz-keyframes disappear {
+    0%  {   
+        height: 200px;
+        opacity: 1; 
+        margin-top: 15px;    
+    }   
+    100% { 
+        height: 0;
+        opacity: 0;
+        margin-top: 0px;
+     }
+  }
+  @-o-keyframes disappear {
+    0%  {   
+        height: 200px;
+        opacity: 1; 
+        margin-top: 15px;    
+    }
+    100% { 
+        height: 0;
+        opacity: 0;
+        margin-top: 0px;
+     }
+  }
+  @keyframes disappear {
+    0%  {   
+        height: 200px;
+        opacity: 1;  
+        margin-top: 15px;
+    }
+    100% { 
+        height: 0;
+        opacity: 0;
+        margin-top: 0px;
+     }
+  }
+
+@-webkit-keyframes appear {
+    0%  { 
+            opacity: 0; 
+            height: 0;
+            margin-top: 0px;
+        }
+    100%{ 
+            opacity: 1;
+            height: 200px;
+            margin-top: 15px;
+        }
+  }
+  @-moz-keyframes appear {
+    0%  { 
+        opacity: 0; 
+        height: 0;
+        margin-top: 0px;
+    }
+    100%{ 
+        opacity: 1;
+        height: 200px;
+        margin-top: 15px;
+    }   
+  }
+  @-o-keyframes appear {
+    0%  { 
+        opacity: 0; 
+        height: 0;
+        margin-top: 0px;
+    }
+    100%{ 
+        opacity: 1;
+        height: 200px;
+        margin-top: 15px;
+    }   
+  }
+  @keyframes appear {
+    0%  { 
+        opacity: 0; 
+        height: 0;
+        margin-top: 0px;
+    }
+    100%{ 
+        opacity: 1;
+        height: 200px;
+        margin-top: 15px;
+    }   
+  }
+
+  @-webkit-keyframes listappear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @-moz-keyframes listappear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @-o-keyframes listappear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes listappear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+.settings {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.update-settigns { 
+    margin-top: 3px;
+    height: 38px;
+    width: 38px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border: none;
+    transition: all 1s ease;
+    position: relative;
+}
+.fas {
+    font-size: 30px;
+    color: rgb(118, 123, 131);
+}
+
+.update-settigns:hover {
+    transform: rotate(360deg); 
+}
+
+.del-btn-block {
+    height: 100%;
+    border-radius: 0px;
+    display: flex;
+    justify-content: flex-end;
+    width: 10%;
+}
+
+.delete-card {
+    background-color: rgb(232, 242, 250);
+    border: none;
+    border-radius: 0px;
+    outline: none;
+    height: 35px;
+}
+
+.fa-times {
+    font-size: 26px;
+    color: rgb(206, 119, 119);
+    transition: all 0.3s ease;
+}
+
+.fa-times:hover {
+    color: rgb(184, 89, 89);
+}
+
+.main-listitem-block {
+    text-align: center;
+    height: 100%;
+    width: 50%;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.card-name {
+    margin: 0px;
+    font-size: 25px;
+}
+
+.card-temp {
+    margin: 0px;
+    font-size: 40px;
+}
+
+.upd-info {
+    margin: 0px;
+    color: rgb(75, 75, 75);
+    font-size: 15px;
+}
+
+.listitem-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 40%;
+    border-radius: 0px;
+}
+
+.description-weather {
+    font-size: 18px;
+    margin: 0px;
+}
+
+.list-item-main {
+    display: flex;
+    height: 70%;
+    border-radius: 0px;
+}
+
+.more-info {
+    height: 30%;
+    font-size: 17px;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+    background-color:rgb(142, 142, 197);
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.more-info:hover {
+    background-color: rgb(118, 118, 189);
+}
+
+.item-enter {
+    opacity: 0;
+}
+
+.item-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-out;
+}
+
+.item-exit {
+    opacity: 1;
+}
+
+.item-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+}
