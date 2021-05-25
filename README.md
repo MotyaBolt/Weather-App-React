@@ -1,5 +1,20 @@
-# Weather-App React
+# Weather App
 
-## Link:  https://weather-app-myweather.herokuapp.com/
+![weather-app](http://g.recordit.co/vOPSfX7UCO.gif)
 
-<img width="1280"  alt="Screen Shot 2021-05-20 at 12 25 08 AM" src="https://user-images.githubusercontent.com/66522023/118886585-d7b4fa80-b901-11eb-96e4-aeea4de970ff.png">
+⬆️ <i>Appearance of the app</i>
+
+### [Live Demo](https://weather-app-myweather.herokuapp.com/)
+
+## ✏️ Description
+
+The app allows you to watch the weather forecast
+
+## Installation
+
+To install this project run `$ npm install`
+
+## Usage
+
+Run command `$ npm start`, when go to http://localhost:3000/.
+Enter the city in the input field, when click 'Enter' and you will see weather forecast.
