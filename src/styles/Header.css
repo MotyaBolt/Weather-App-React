@@ -1,148 +1,146 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 .header {
-    transition: all 0.3s ease;
-    background-color: white;
-    height: 11vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    box-shadow: 0 4px 5px 0 rgb(223, 222, 222);
+  transition: all 0.3s ease;
+  background-color: white;
+  height: 11vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: 0 4px 5px 0 rgb(223, 222, 222);
 }
 
-
 .cels-fahr-selector {
-    display: flex;
-    width: 100px;
-    height: 28px;
-    cursor: pointer;
-    border: 1px solid #609cb1;
+  display: flex;
+  width: 100px;
+  height: 28px;
+  cursor: pointer;
+  border: 1px solid #609cb1;
 }
 
 .temp-item {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .cels-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100%;
-    background-color: #609cb1;
-    color: white;
-    transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  background-color: #609cb1;
+  color: white;
+  transition: all 0.3s ease;
 }
 
 .cels-block-after {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100%;
-    background-color: white;
-    transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  transition: all 0.3s ease;
 }
 
 .fahr-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100%;
-    background-color:  #609cb1;
-    color: white;
-    transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  background-color: #609cb1;
+  color: white;
+  transition: all 0.3s ease;
 }
 
 .fahr-block-after {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100%;
-    background-color: white;
-    transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  transition: all 0.3s ease;
 }
 
 .cities-list-before {
-   display: none;
+  display: none;
 }
 
 .cities-list-after {
-    width: 263px;
-    height: 300px;
-    overflow: auto;
-    z-index: 20;
-    background-color:rgb(246, 246, 251); 
-    box-shadow : 0px 8px 16px 0px rgba(0,0,0,0.2);
-    position: absolute;
-    outline: none;
+  width: 263px;
+  height: 300px;
+  overflow: auto;
+  z-index: 20;
+  background-color: rgb(246, 246, 251);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  outline: none;
 }
 
 .search-item {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    background-color: rgb(246, 246, 251);
-    height: 35px;
-    padding: 3px;
-    font-size: 19px;
-    padding-left: 7px;
-    cursor: pointer;
-    outline: none;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  background-color: rgb(246, 246, 251);
+  height: 35px;
+  padding: 3px;
+  font-size: 19px;
+  padding-left: 7px;
+  cursor: pointer;
+  outline: none;
 }
 
 .search-item:hover {
-    background-color: rgb(222, 222, 233);
+  background-color: rgb(222, 222, 233);
 }
 
 .header-main {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-
 .page-name {
-    margin: 0px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 35px;
-    color: rgb(120, 120, 195);
+  margin: 0px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 35px;
+  color: rgb(120, 120, 195);
 }
 
 span {
-    font-size: 17px;
+  font-size: 17px;
 }
 
 .search-input {
-    height: 35px;
-    font-size: 19px;
-    outline: none;
-    width: 250px;
-    padding-left: 7px;
-    margin-right: 10px;
-    border: 2px solid rgb(189, 189, 226);
-    transition: all 0.3s ease;
+  height: 35px;
+  font-size: 19px;
+  outline: none;
+  width: 250px;
+  padding-left: 7px;
+  margin-right: 10px;
+  border: 2px solid rgb(189, 189, 226);
+  transition: all 0.3s ease;
 }
 
 .search-input:focus {
-    border: 2px solid rgb(120, 120, 195);
+  border: 2px solid rgb(120, 120, 195);
 }
 
 .search-btn {
-    height: 41px;
-    width: 120px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: white;
-    border: 1px solid rgb(94, 129, 94);
-    outline: none;
-    color: rgb(94, 129, 94);
-    transition: all 0.3s ease;
+  height: 41px;
+  width: 120px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid rgb(94, 129, 94);
+  outline: none;
+  color: rgb(94, 129, 94);
+  transition: all 0.3s ease;
 }
 
 .search-btn:hover {
-    color: white;
-    background-color: rgb(94, 129, 94);
+  color: white;
+  background-color: rgb(94, 129, 94);
 }

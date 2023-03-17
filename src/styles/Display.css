@@ -1,180 +1,177 @@
 .display {
-    
-    width: 50%;
-    max-height: 89vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 50%;
+  max-height: 89vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .display-none {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 89vh;
-    z-index: -5;
-    background-color: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 89vh;
+  z-index: -5;
+  background-color: white;
 }
 
-
 .display-wrapper {
-    height: 460px;
-    width: 500px;
-    box-shadow: #7a797959 0px 5px 15px;
+  height: 460px;
+  width: 500px;
+  box-shadow: #7a797959 0px 5px 15px;
 }
 
 .upd-btn-wrapper {
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .update-btn {
-    background-color: white;
-    outline: none;
-    border: none;
-    padding: 15px;
+  background-color: white;
+  outline: none;
+  border: none;
+  padding: 15px;
 }
 
 .display-main {
-    width: 500px;
-    height: 410px;
-    display: flex;
-    justify-content: center;
-   
+  width: 500px;
+  height: 410px;
+  display: flex;
+  justify-content: center;
 }
 
 .display-after {
-    position: absolute;
-    width: 50%;
-    height: 88vh;
-    background-color: white;
-    top: 12vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: rgb(158, 93, 93);
+  position: absolute;
+  width: 50%;
+  height: 88vh;
+  background-color: white;
+  top: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: rgb(158, 93, 93);
 }
 
 .main {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .main-temp {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .display-before {
-    display: none;
+  display: none;
 }
 
 .city-name {
-    font-size: 30px;
-    margin-bottom: 0px;
-    margin-top: 80px;
+  font-size: 30px;
+  margin-bottom: 0px;
+  margin-top: 80px;
 }
 
 .current-date {
-    font-size: 21px;
-    margin-bottom: 5px;
+  font-size: 21px;
+  margin-bottom: 5px;
 }
 
 .current-time {
-    color: rgb(219, 111, 61);
-    font-size: 18px;
-    margin-bottom: 5px;
+  color: rgb(219, 111, 61);
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
 .weather-desc {
-    font-size: 20px;
-    margin-bottom: 0px;
+  font-size: 20px;
+  margin-bottom: 0px;
 }
 
 .weather-icon {
-    width: 80px;
-    height: 80px;
+  width: 80px;
+  height: 80px;
 }
 
 .temp-block {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fa-sync-alt {
-    color: gray;
-    transition: all 1s ease;
+  color: gray;
+  transition: all 1s ease;
 }
 
 .fa-sync-alt:hover {
-    transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 
 .temp {
-    font-size: 55px;
+  font-size: 55px;
 }
 
 .feelslike-temp-wrapper {
-    font-size: 22px;
+  font-size: 22px;
 }
 
 .temp-block-more {
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .humidity {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .celcius-switcher {
-    color: black;
-    background-color: white;
-    outline: none;
-    border: none;
-    padding: 10px;
-    font-size: 25px;
-    border-right: 1px solid black;
+  color: black;
+  background-color: white;
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 25px;
+  border-right: 1px solid black;
 }
 
 .celcius-switcher-after {
-    outline: none;
-    border: none;
-    padding: 10px;
-    font-size: 19px;
-    background-color: white;
-    color: rgb(90, 87, 87);
-    border-right: 1px solid black;
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 19px;
+  background-color: white;
+  color: rgb(90, 87, 87);
+  border-right: 1px solid black;
 }
 
 .fahrenheit-switcher {
-    color: black;
-    outline: none;
-    border: none;
-    padding: 10px;
-    font-size: 25px;
-    background-color: white;
+  color: black;
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 25px;
+  background-color: white;
 }
 
 .fahrenheit-switcher-after {
-    outline: none;
-    border: none;
-    padding: 10px;
-    font-size: 19px;
-    background-color: white;
-    color: rgb(90, 87, 87);
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 19px;
+  background-color: white;
+  color: rgb(90, 87, 87);
 }
